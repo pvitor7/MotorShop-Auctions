@@ -1,8 +1,8 @@
 import { 
-  // createTheme, 
   TextField } from "@mui/material";
 import { IPlaceholder } from "../../interface/propsComponents";
 import { InputStyled } from "./style";
+import { useState } from "react"
 
 const InputText = ({
   label,
@@ -18,6 +18,7 @@ const InputText = ({
   setFunction
 }: IPlaceholder) => {
 
+  const [textInput, setTextInput] = useState('');
 
   return (
     <InputStyled>
@@ -32,7 +33,11 @@ const InputText = ({
         multiline={multiline}
         type={type}
         disabled={disabled}
-        onChange={(e) => setFunction(e.target.value)}
+        value={textInput}
+        onChange={(e) => { 
+          setFunction(e.target.value)
+          setTextInput(e.target.value)
+        }}
 
       />
     </InputStyled>

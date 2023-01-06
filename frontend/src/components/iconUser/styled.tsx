@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-const UserIconStyle = styled.div`
+const UserIconStyle = styled(motion.div)`
   display: flex;
   gap: 10px;
 

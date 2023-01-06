@@ -8,11 +8,11 @@ import { Redirect, useHistory } from "react-router-dom";
 import { convertInitialsName } from "../../utils/index";
 import {UserIcon} from "../iconUser/index";
 import { HeaderStyled, MenuStyled, MenuProfileStyled } from "./style";
-
+import { motion } from "framer-motion"
 import { AiOutlineLoading } from "react-icons/ai";
 
 export const Header = () => {
-  const { user, GetUser } = useUser();
+  const { user } = useUser();
   const {
     inOnSucess,
     setInOnSucess,
@@ -39,8 +39,6 @@ export const Header = () => {
       setUserExists(true);
     }, 2000);
   }, [user]);
-
-  useEffect(() => GetUser())
 
   useEffect(() => {
     if (user.name) {
@@ -87,17 +85,17 @@ export const Header = () => {
 
             {initialsName ? 
             (
-              userExistis ?
               <div onClick={() => openCloseMenuProfile()}>
                 <UserIcon 
                   name={user.name}
                   initials={initialsName}
                 />
               </div> 
-              :
-              <AiOutlineLoading className="loading-user" />
             ) : (
-              <>
+              !userExistis ?
+              (<AiOutlineLoading className="loading-user"/>)
+                :
+              (<form>
                 <h4
                   onClick={() => setInOnLogin(true)}
                   className="nav--menu-desktop-h4"
@@ -105,12 +103,15 @@ export const Header = () => {
                   Fazer Login
                 </h4>
                 <button
-                  onClick={() => setInOnRegister(true)}
+                  onClick={(e) => { 
+                    e.preventDefault()
+                    setInOnRegister(true) 
+                  }}
                   className="nav--menu-desktop-button-register"
                 >
                   Cadastrar
                 </button>
-              </>
+              </form>)
             )}
           </div>
         </nav>
@@ -188,17 +189,18 @@ export const Header = () => {
               <h4
                 className="nav--menu-mobile-h4"
                 onClick={() => {
-                  setInOnLogin(true);
                   setOpenMenu(false);
+                  setInOnLogin(true);
                 }}
               >
                 Fazer Login
               </h4>
               <button
                 className="mobile-button-register"
-                onClick={() => {
-                  setInOnRegister(true);
+                onClick={(e) => {
+                  e.preventDefault();
                   setOpenMenu(false);
+                  setInOnRegister(true);
                 }}
               >
                 Cadastrar

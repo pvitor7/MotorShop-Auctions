@@ -9,22 +9,24 @@ export const UserContext = createContext({} as IUserState);
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState({});
   const [userCreate, setUserCreate] = useState({});
-  const [userLogin, setUserLogin] = useState({});
-
+  const [userLoginEmail, setUserLoginEmail] = useState("");
+  const [userLoginPassword, setUserLoginPassword] = useState("");
   const { hideModalLogin, showModalSucess, hideModalRegister } = useModal();
 
-  const LoginFunction = () => {
-    axios
-      .post("http://localhost:3000/login", userLogin)
-      .then((response) => {
-        hideModalLogin();
-        toast.success("Login realizado com sucesso!");
-        sessionStorage.setItem("user", JSON.stringify(response.data.token));
-      })
-      .catch(() => toast.error("Ops! Algo deu errado!"));
-  };
+  useEffect(() => GetUser());
 
-const UserRegisterFunction = () => {
+  const LoginFunction = () => {
+      axios
+        .post("http://localhost:3000/login", {email: userLoginEmail, password: userLoginPassword})
+        .then((response) => {
+          sessionStorage.setItem("user", JSON.stringify(response.data.token));
+          hideModalLogin();
+          toast.success("Login realizado com sucesso!");
+        })
+        .catch((error) => toast.error(error.response.data.message));
+ };
+
+  const UserRegisterFunction = () => {
     axios
       .post("http://localhost:3000/users/register", userCreate)
       .then(() => {
@@ -41,11 +43,10 @@ const UserRegisterFunction = () => {
         hideModalRegister();
         showModalSucess();
       })
-      .catch(() => toast.error("Ops! Algo deu errado!"));
-};
+      .catch((error) => toast.error(error.response.data.message));
+  };
 
-
-const GetUser = () => {
+  const GetUser = () => {
     if (sessionStorage.getItem("user")) {
       const token = JSON.parse(sessionStorage.getItem("user") || "");
       axios
@@ -56,8 +57,7 @@ const GetUser = () => {
         })
         .then((response) => {
           setUser(response.data);
-        })
-        .catch(() => toast.error("Ops! Algo deu errado!"));
+        });
     }
   };
 
@@ -68,10 +68,11 @@ const GetUser = () => {
         setUserCreate,
         user,
         setUser,
-        setUserLogin,
+        setUserLoginEmail,
+        setUserLoginPassword,
         LoginFunction,
         UserRegisterFunction,
-        GetUser
+        GetUser,
       }}
     >
       {children}

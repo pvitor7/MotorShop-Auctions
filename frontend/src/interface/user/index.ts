@@ -10,7 +10,8 @@ export interface IUserState{
     userCreate: Object;
     setUser: (data: boolean) => void;
     setUserCreate: (data: Object) => void;
-    setUserLogin: (data: Object) => void;
+    setUserLoginEmail: (email: string) => void;
+    setUserLoginPassword: (password: string) => void;
     LoginFunction: () => void;
     UserRegisterFunction: () => void;
     GetUser: () => void;

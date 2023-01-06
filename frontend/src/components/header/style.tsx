@@ -104,7 +104,7 @@ export const HeaderStyled = styled.header`
     width: 20%;
     height: auto;
     color: var(--color-brand-2);
-    animation: spinner infinite 1s linear;
+    animation: spinner infinite 0.8s linear;
   }
   
 }
@@ -143,6 +143,19 @@ export const HeaderStyled = styled.header`
       width: 50%;
       min-width: 200px;
       gap: 10px;
+    }
+
+    .nav--login-register-desktop > form{
+      display: flex;
+      width: 100%;
+      height: 100%;
+      justify-content: space-around;
+      align-items: center;
+      gap: 5%;
+    }
+
+    .nav--login-register-desktop > div > div {
+      gap: 2vw;
     }
 
     .nav--menu-desktop-h4 {

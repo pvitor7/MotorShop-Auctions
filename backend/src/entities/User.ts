@@ -1,4 +1,5 @@
-import { Column, CreateDateColumn, UpdateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm"
+import { Column, CreateDateColumn, UpdateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from "typeorm";
+import { v4 as uuid } from "uuid";
 import Comment from "./Comment"
 import Vehicle from "./Vehicle"
 import Offers from "./Offers"
@@ -45,6 +46,12 @@ class User {
         eager: true
     })
     offers: Offers[]
+
+    // constructor(){
+    //     if(!this.id){
+    //         this.id = uuid();
+    //     }
+    // }
 
 }
 

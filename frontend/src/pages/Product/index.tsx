@@ -13,6 +13,7 @@ import { timeAuction } from "../../utils/index";
 import { IoIosClose } from "react-icons/io";
 import { useModal } from "../../providers/modal";
 import { AiOutlineLoading } from "react-icons/ai";
+import { motion } from "framer-motion";
 
 const Product = () => {
   const {
@@ -30,21 +31,30 @@ const Product = () => {
     NewPhotoFunction,
   } = useVehicle();
   const { inOnModalAddPhoto, setInOnModalAddPhoto } = useModal();
-
-  const [newCommentState, setNewCommentState] = useState("");
-  const [inputDisabled, setInputDisabled] = useState(true);
-  const [offer, setOffer] = useState(0);
-  const { id }: any = useParams();
   const { user } = useUser();
+  const { id }: any = useParams();
+
+  const [inputDisabled, setInputDisabled] = useState(true);
   const [timeForAuction, setTimeForAuction]: any = useState();
-  const [urlNewPhoto, setUrlNewPhoto] = useState("");
   const [vehicleExistis, setVehicleExists] = useState(false);
 
   useEffect(() => {
     setInterval(() => {
       setVehicleExists(true);
-    }, 2000);
+    }, 200);
   });
+
+  const newOfferFunction = () => {
+    setTimeout(() => {
+      NewOfferFunction();
+    }, 1000);
+  };
+
+  const commentFunction = () => {
+    setTimeout(() => {
+      NewCommentVehicle();
+    }, 1000);
+  };
 
   useEffect(() => {
     setId(id);
@@ -56,21 +66,6 @@ const Product = () => {
       }, 1000);
     }
   }, [id, user]);
-
-  const commentFunction = () => {
-    setNewComment(newCommentState);
-    setTimeout(() => {
-      NewCommentVehicle();
-    }, 1000);
-  };
-
-  const newOfferFunction = () => {
-    setNewOffer(Number(offer));
-
-    setTimeout(() => {
-      NewOfferFunction();
-    }, 200);
-  };
 
   const initialsName = convertInitialsName(vehicle.username);
   const intialsProfile = convertInitialsName(user.name);
@@ -84,35 +79,37 @@ const Product = () => {
       <C.Header />
       <S.ProductPageStyled>
         <section className="div--main">
-          <S.ContainerIMG>
-            {vehicleExistis ? (
-              <img src={vehicle.img} />
-            ) : (
-              <AiOutlineLoading className="loading-icon" />
-            )}
+          <S.ContainerIMG
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.5,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+          >
+            <img src={vehicle.img} />
           </S.ContainerIMG>
 
-          <S.ContainerInfoProduct>
-            {vehicleExistis ? (
-              <>
-                <p>{vehicle.heading}</p>
+          <S.ContainerInfoProduct
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{
+              duration: 0.8,
+              delay: 0.5,
+              ease: [0, 0.71, 0.2, 1.01],
+            }}
+          >
+            <p>{vehicle.heading}</p>
 
-                <div>
-                  <C.LabelAgeKm info={vehicle.year} />
-                  <C.LabelAgeKm info={vehicle.km} />
-                </div>
-                <label>{priceBRL}</label>
-                <div>
-                  <C.ButtonUI
-                    text="Comprar"
-                    color="primary"
-                    variant="contained"
-                  />
-                </div>
-              </>
-            ) : (
-              <AiOutlineLoading className="loading-icon" />
-            )}
+            <div>
+              <C.LabelAgeKm info={vehicle.year} />
+              <C.LabelAgeKm info={vehicle.km} />
+            </div>
+            <label>{priceBRL}</label>
+            <div>
+              <C.ButtonUI text="Comprar" color="primary" variant="contained" />
+            </div>
           </S.ContainerInfoProduct>
 
           <S.ContainerDescription>
@@ -153,8 +150,9 @@ const Product = () => {
                 <C.UserIcon name={user.name} initials={intialsProfile} />
               )}
               <C.InputText
-                setFunction={setNewCommentState}
+                setFunction={setNewComment}
                 color="primary"
+                placeholder={"Digite seu comentário"}
                 multiline
                 rows={3}
                 disabled={inputDisabled}
@@ -165,9 +163,10 @@ const Product = () => {
                 color="primary"
                 variant="contained"
               />
-              {user && (
+              {/* {user && (
                 <div className="comments-standart">
-                  <label onClick={() => setNewComment("Gostei muito!")}>
+                  <label 
+                  onClick={() => { setNewComment("Gostei muito!")}}>
                     Gostei muito!
                   </label>
                   <label onClick={() => setNewComment("Incrível!")}>
@@ -181,7 +180,7 @@ const Product = () => {
                     Recomendarei para meus amigos!
                   </label>
                 </div>
-              )}
+              )} */}
             </S.ContainerNewComments>
           )}
         </section>
@@ -218,7 +217,7 @@ const Product = () => {
               {!inputDisabled && timeForAuction != "Encerrado" && (
                 <div>
                   <C.InputText
-                    setFunction={setOffer}
+                    setFunction={setNewOffer}
                     color="primary"
                     multiline
                     rows={1}
@@ -257,18 +256,14 @@ const Product = () => {
                 type="text"
                 placeholder="Insira o endereço da imagem"
                 onChange={(e) => {
-                  setUrlNewPhoto(e.target.value);
+                  setNewPhoto(e.target.value);
                 }}
               />{" "}
               <button
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
-                  setNewPhoto(urlNewPhoto);
-
-                  setTimeout(() => {
                     NewPhotoFunction();
-                  }, 2000);
                 }}
               >
                 Enviar

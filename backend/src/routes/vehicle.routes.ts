@@ -5,14 +5,14 @@ import listVehicleController from "../controllers/vehicle/ListMotors.controller"
 import retriveVehicleController from "../controllers/vehicle/retriveMotor.controller"
 import { AuthMiddleware } from "../middlewares/VerifyToken.middleware"
 
-const motor = Router()
+const vehicle = Router()
 
-motor.post("", AuthMiddleware, createVehicleController)
+vehicle.post("", AuthMiddleware, createVehicleController)
 
-motor.get("", listVehicleController)
+vehicle.get("", listVehicleController)
 
-motor.get("/:idVehicle", retriveVehicleController)
+vehicle.get("/:idVehicle", retriveVehicleController)
 
-motor.delete("/:id", AuthMiddleware, deleteVehicleController)
+vehicle.delete("/:id", AuthMiddleware, deleteVehicleController)
 
-export default motor
+export default vehicle

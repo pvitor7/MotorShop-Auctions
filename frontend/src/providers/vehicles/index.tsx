@@ -22,10 +22,26 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
   const [newOffer, setNewOffer] = useState(0);
   const [newPhoto, setNewPhoto] = useState("");
 
+
+  const [sale, setSale] = useState(false);
+  const [auction, setAuction] = useState(true);
+  const [car, setCar] = useState(true);
+  const [motorCycle, setMotorcycle] = useState(false);
+  const [heading, setHeading] = useState("");
+  const [dateAuction, setDateAuction] = useState("");
+  const [year, setAge] = useState("");
+  const [km, setKm] = useState("");
+  const [price, setPrice] = useState("");
+  const [description, setDescription] = useState("");
+  const [img, setImgCape] = useState("");
+  const [imgGalery1, setImgGalery1] = useState("");
+  const [imgGalery2, setImgGalery2] = useState("");
+  const [imgGalery3, setImgGalery3] = useState("");
+  const [typeVehicle, setTypeVehicle] = useState("");
+
   const NewCommentVehicle = () => {
     if (sessionStorage.getItem("user")) {
       const token = JSON.parse(sessionStorage.getItem("user") || "");
-
       axios
         .post(
           `http://localhost:3000/comment/${id}`,
@@ -34,9 +50,9 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
         )
         .then((response) => {
           setNewComment("");
-          toast.success("Comentárop registrado com sucesso!");
+          toast.success("Comentário registrado com sucesso!");
         })
-        .catch(() => toast.error("Ops! Algo deu errado!"));
+        .catch((error) => toast.error(error.response.data.message));
     }
   };
 
@@ -44,8 +60,26 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
     if (sessionStorage.getItem("user")) {
       const token = JSON.parse(sessionStorage.getItem("user") || "");
 
+      console.log({heading, year, km, price, description, img, published: sale, status: auction, auction: auction, dateAuction: dateAuction, categorie: typeVehicle || "car", gallery:[{ url: imgGalery1 }, { url: imgGalery2 }, { url: imgGalery3 }]})
+
       axios
-        .post("http://localhost:3000/vehicle", newVehicle, {
+        .post("http://localhost:3000/vehicle", {
+          heading,
+          year,
+          km,
+          price,
+          description,
+          img,
+          imgGalery1,
+          imgGalery2,
+          published: sale,
+          status: auction,
+          auction: auction,
+          dateAuction: dateAuction,
+          categorie: typeVehicle || "car",
+          gallery:[{ url: imgGalery1 }, { url: imgGalery2 }, { url: imgGalery3 },
+          ]
+        }, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -54,7 +88,7 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
           toast.success("Veículo registrado com sucesso!");
           hideModalAnnouncement();
         })
-        .catch(() => toast.error("Ops! Algo deu errado!"));
+        .catch((error) => toast.error(error.response.data.message));
     }
   };
 
@@ -62,7 +96,6 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
   const NewOfferFunction = () => {
     if (sessionStorage.getItem("user")) {
       const token = JSON.parse(sessionStorage.getItem("user") || "");
-      
       axios
         .post(
           `http://localhost:3000/offers/${id}`,
@@ -73,7 +106,10 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
           setNewOffer(0)
           toast.success("Lance registrado com sucesso!");
         })
-        .catch(() => toast.error("Ops! O lance não foi registrado!"));
+        .catch((error) => {
+          setNewOffer(0)
+          toast.error(error.response.data.message);
+        });
     }
   }
 
@@ -91,7 +127,7 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
           setInOnModalAddPhoto(false);
           setNewPhoto('')
         })
-        .catch(() => toast.error("Ops! A imagem não foi registrada!"));
+        .catch((error) => toast.error(error.response.data.message));
     }
   }
 
@@ -113,7 +149,7 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
     axios
       .get("http://localhost:3000/categorie/motorCycle")
       .then((response) => setListMotorcycles(response.data.vehicles));
-  }, [id, newComment, newVehicle, newPhoto]);
+  }, [id, newComment, newVehicle, newPhoto, setNewOffer, vehicle]);
 
   return (
     <VehicleContext.Provider
@@ -131,7 +167,27 @@ export const VehicleProvider = ({ children }: ListVehicleProviderProps) => {
         NewCommentVehicle,
         NewVehicleFunction,
         NewOfferFunction,
-        NewPhotoFunction
+        NewPhotoFunction,
+
+        sale,
+        car,
+        auction,
+        motorCycle,
+        setSale,
+        setAuction,
+        setCar,
+        setMotorcycle,
+        setHeading,
+        setDateAuction,
+        setAge,
+        setKm,
+        setPrice,
+        setDescription,
+        setImgCape,
+        setImgGalery1,
+        setImgGalery2,
+        setImgGalery3,
+        setTypeVehicle,
       }}
     >
       {children}

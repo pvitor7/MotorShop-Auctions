@@ -12,8 +12,10 @@ const InputStyled = styled.div`
         font-size: 14px; 
         overflow: hidden;
    }
-    
-`
 
+   ::placeholder{
+    color: var(--color-grey-0);
+   }
+`
 
 export {InputStyled}

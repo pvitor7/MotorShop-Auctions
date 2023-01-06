@@ -57,6 +57,26 @@ export interface IVehicleContext {
   NewVehicleFunction: () => void;
   NewOfferFunction: () => void;
   NewPhotoFunction: () => void;
+
+  sale: boolean;
+  car: boolean;
+  auction: boolean;
+  motorCycle: boolean;
+  setSale: (data: boolean) => void;
+  setAuction: (data: boolean) => void;
+  setCar: (data: boolean) => void;
+  setMotorcycle: (data: boolean) => void;
+  setHeading: (data: string) => void;
+  setDateAuction: (data: string) => void;
+  setAge: (data: string) => void;
+  setKm: (data: string) => void;
+  setPrice: (data: string) => void;
+  setDescription: (data: string) => void;
+  setImgCape: (data: string) => void;
+  setImgGalery1: (data: string) => void;
+  setImgGalery2: (data: string) => void;
+  setImgGalery3: (data: string) => void;
+  setTypeVehicle: (data: string) => void;
 }
 
 export interface ListVehicleProviderProps {

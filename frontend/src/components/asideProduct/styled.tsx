@@ -65,6 +65,22 @@ export const ContainerGalery = styled(motion.div)`
       width: 100%;
     }
 
+@keyframes img-animation {
+  
+  0%{
+    transform: translate;
+  }
+
+  100%{
+    
+  }
+  
+  to {
+      transform: rotate(360deg);
+    }
+  }
+
+
     img {
       width: 30%;
       margin: 20px 0px;

@@ -7,9 +7,7 @@ import { useUser } from "../../providers/user/index";
 import { Redirect, Link } from "react-router-dom";
 
 const ProfilePage = () => {
-  const { user, GetUser } = useUser();
-
-  useEffect(() => GetUser())
+  const { user } = useUser();
 
   const motorCycles = user.vehicles?.filter(
     (vehicle) => vehicle.category === "motorCycle"

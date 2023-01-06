@@ -1,6 +1,7 @@
 import styled from "styled-components";
+import { motion } from "framer-motion"
 
-export const LiCard = styled.li`
+export const LiCard = styled(motion.li)`
   list-style: none;
   display: flex;
   flex-direction: column;
@@ -13,15 +14,28 @@ export const LiCard = styled.li`
   cursor: pointer;
 
   > figure {
+    position: relative;
     display: flex;
-    justify-content: center;
-    width: 300px;
+    width: 100%;
     height: 152px;
     margin: 0;
 
   }
 
+  > figure > span {
+    position: absolute;
+    z-index: 1;
+    background: var(--color-brand-1);
+    display: flex;
+    color: var(--color-white-fixed);
+    padding: 4px 6px;
+    margin: 10px;
+    font-size: 12px;
+    border-radius: 2px;
+  }
+
   > figure > img {
+    /* position: static; */
     height: 152px;
     max-width: 100%;
     margin-top: 1px;

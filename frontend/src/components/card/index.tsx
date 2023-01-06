@@ -16,6 +16,7 @@ const Card = ({owner, vehicle }: VehiclesProps) => {
     km,
     img,
     year,
+    auction,
     price
   }: Vehicle = vehicle;
 
@@ -34,9 +35,19 @@ const Card = ({owner, vehicle }: VehiclesProps) => {
   
 
   return (
-    <LiCard>
+    <LiCard
+    initial={{ opacity: 0, scale: 0.5 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{
+      duration: 0.8,
+      delay: 0.5,
+      ease: [0, 0.71, 0.2, 1.01],
+    }}
+    >
     
       <figure>
+        <span>{auction? "Ativo" : "Inativo"}</span>
+
         <img onClick={()=> history.push(`/product/${id}`)} src={img} alt="" />
       </figure>
 

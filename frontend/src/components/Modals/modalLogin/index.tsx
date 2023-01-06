@@ -22,15 +22,12 @@ function ModalLogin() {
     ? "modal containerModal"
     : "modal containerModal hidden";
 
-    const { user, setUserLogin, LoginFunction} = useUser();
+    const { 
+      setUserLoginEmail,
+      setUserLoginPassword, LoginFunction} = useUser();
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-
-    const loginFunction = () => {
-      setUserLogin({email, password});
-      LoginFunction()
-    }
 
     const registerFunction = () => {
       hideModalLogin();
@@ -50,12 +47,12 @@ function ModalLogin() {
           <motion.form>
             <div className="modalBody">
             
-              <C.InputText setFunction={setEmail} label="Usuário" placeholder="Usuário"  color="secondary"/>
-              <C.InputText setFunction={setPassword} label="Senha" placeholder="Senha"  color="secondary"/>
+              <C.InputText setFunction={setUserLoginEmail} label="Usuário" placeholder="Usuário"  color="secondary"/>
+              <C.InputText setFunction={setUserLoginPassword} label="Senha" placeholder="Senha"  color="secondary"/>
             
               <a href=" ">Esqueci minha senha</a>
               <C.ButtonUI 
-              setBoolean={loginFunction}  text="Entrar"
+              setBoolean={LoginFunction}  text="Entrar"
               type="submit" color="primary" variant="contained"/> 
 
               <label className="label--register">Ainda não possui conta?</label>
