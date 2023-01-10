@@ -2,7 +2,7 @@
 Plataforma de venda e leilão de veículos
 
 
-# Documentação da API
+# Documentação
 
 ## Tabela de Conteúdos
 
@@ -30,30 +30,45 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
-### 2.1. Instalando Dependências
+### 2.1. Variáveis de Ambiente
 
-Clone o projeto em sua máquina e instale as dependências com o comando:
-
-```shell
-yarn
-```
-
-### 2.2. Variáveis de Ambiente
-
-Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
+Clone o projeto em sua máquina. Em seguida, dentro do diretório **./backend** crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
 
 ```
 cp .env.example .env
+```
+
+### 2.2. Instalando Dependências
+
+Após isso, retorne a pasta raiz do projeto para a criação dos containers, utilize o seguinte comando:
+
+```shell
+docker-compose up
 ```
 
 Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
 
 ### 2.3. Migrations
 
-Execute as migrations com o comando:
+Em outro terminal, execute as migrations com o comando:
 
+
+```shell
+- docker exec api_motorshop yarn typeorm migration:generate src/migrations/createTable -d src/data-source.ts
 ```
-yarn typeorm migration:run -d src/data-source.ts
+
+
+```shell
+- docker exec api_motorshop yarn typeorm migration:run -d src/data-source.ts
+```
+
+### 2.4. Testes
+
+A api também possui testes (em desenvolvimento), que podem ser executados dentro do diretório **./backend** com o comando:
+
+
+```shell
+- yarn test
 ```
 
 ## 3. Endpoints
