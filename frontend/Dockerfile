@@ -6,7 +6,7 @@ EXPOSE 3001
 
 WORKDIR /app
 
-COPY . .
+COPY 'package.json' .
 
 RUN yarn 
 

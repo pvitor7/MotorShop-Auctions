@@ -4,18 +4,20 @@ import { ICommentPropsCard, IComment } from "../propsComponents/index"
 
 export interface Vehicle {
   id:             string;
-  username?:     string;
-  heading:       string;
-  img:           string;
-  description:   string;
-  km:            string;
-  year:          string;
-  price:         string;
+  username?:      string;
+  heading:        string;
+  img:            string;
+  description:    string;
+  km:             string;
+  year:           string;
+  price:          string;
   photos?:        any;
   auction:        boolean;
   comments?:      IComment[];
   offers?:        Object[];
-  dateAuction?:    string;
+  dateAuction?:   string;
+  userId:         string;
+  status:         boolean;
 }
 
 export interface VehiclesProps {
@@ -24,29 +26,29 @@ export interface VehiclesProps {
 }
 
 export interface IVehicle {
-  id: string;
-  heading: string;
-  status: string;
-  year: string;
-  km: string;
-  price: string;
-  description: string;
-  published: Boolean;
-  img: string;
-  created_at: string;
-  updated_at: string;
-  auction:    boolean;
-  categorieId: string;
-  userId: string;
-  category: string;
+  id:             string;
+  heading:        string;
+  status:         boolean;
+  year:           string;
+  km:             string;
+  price:          string;
+  description:    string;
+  published:      Boolean;
+  img:            string;
+  created_at:     string;
+  updated_at:     string;
+  auction:        boolean;
+  categorieId:    string;
+  userId:         string;
+  category:       string;
 }
 
 export interface IVehicleContext {
-  listVehicles: IVehicle[];
-  listCars: IVehicle[];
+  listVehicles:   IVehicle[];
+  listCars:       IVehicle[];
   listMotorcycles: IVehicle[];
-  vehicle: Vehicle;
-  newVehicle: Object;
+  vehicle:        Vehicle;
+  newVehicle:     Object;
   setNewPhoto: (url: string) => void;
   setNewOffer: (offer: number) => void;
   setNewVehicle: (vehicle: Object) => void;
@@ -57,6 +59,9 @@ export interface IVehicleContext {
   NewVehicleFunction: () => void;
   NewOfferFunction: () => void;
   NewPhotoFunction: () => void;
+  DeleteVehicleFunction: () => void;
+  VehicleUpdateFunction: () => void;
+
 
   sale: boolean;
   car: boolean;
@@ -66,6 +71,7 @@ export interface IVehicleContext {
   setAuction: (data: boolean) => void;
   setCar: (data: boolean) => void;
   setMotorcycle: (data: boolean) => void;
+  setStatus: (data: boolean) => void;
   setHeading: (data: string) => void;
   setDateAuction: (data: string) => void;
   setAge: (data: string) => void;

@@ -7,14 +7,24 @@ export interface UserProviderProps {
 
 export interface IUserState{
     user: IUser;
-    userCreate: Object;
     setUser: (data: boolean) => void;
-    setUserCreate: (data: Object) => void;
     setUserLoginEmail: (email: string) => void;
     setUserLoginPassword: (password: string) => void;
     LoginFunction: () => void;
     UserRegisterFunction: () => void;
     GetUser: () => void;
+
+    setName: (data: string) => void;
+    setEmail: (email: string) => void;
+    setCellphone: (cellphone: string) => void;
+    setPassword: (password: string) => void;
+    setConfirmPassword: (confirmPassword: string) => void;
+    setBuyer: (buyer: boolean) => void;
+    setSeller: (seller: boolean) => void;
+    
+    seller: boolean;
+    buyer: boolean;
+    name: string;
 }
 
 export interface ILoginState{

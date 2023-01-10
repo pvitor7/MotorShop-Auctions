@@ -41,7 +41,8 @@ export const LiCard = styled.li`
     flex-direction: column;
     width: 90%;
     box-sizing: content-box;
-    padding: 10px;
+    padding: 30px;
+    gap: 30px;
     font-family: 'Inter', sans-serif;
 
     
@@ -50,9 +51,8 @@ export const LiCard = styled.li`
         display: flex;
         text-align: justify;
         width: 100%;
-        margin: 0;
-        margin-top: 10px;
-        font-size: 13px;
+        margin: 30px;
+        font-size: 15px;
         
         font-style: normal;
         font-weight: 400;

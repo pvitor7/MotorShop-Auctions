@@ -7,7 +7,7 @@ import asset from "../../img/icons/asset.png";
 import styled from "styled-components";
 import { BsFillCaretLeftFill, BsFillCaretRightFill } from "react-icons/bs";
 
-const ListCard = ({ owner, title, listVehicles }: ITitleSection) => {
+const ListCard = ({ title, listVehicles }: ITitleSection) => {
   const carousel: any = useRef(null);
 
   const handleLeftClick = (e: any) => {
@@ -31,7 +31,7 @@ const ListCard = ({ owner, title, listVehicles }: ITitleSection) => {
         <ul ref={carousel}>
 
           {listVehicles?.map((vehicle, index) => (
-            <Card owner={owner} key={index} vehicle={vehicle} />
+            <Card key={index} vehicle={vehicle} />
           ))}
           
         </ul>

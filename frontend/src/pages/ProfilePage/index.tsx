@@ -4,19 +4,16 @@ import ListCard from "../../components/listCard";
 import { useVehicle } from "../../providers/vehicles";
 import { useState, useEffect } from "react";
 import { useUser } from "../../providers/user/index";
-import { Redirect, Link } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 
 const ProfilePage = () => {
+
   const { user } = useUser();
 
   const motorCycles = user.vehicles?.filter(
     (vehicle) => vehicle.category === "motorCycle"
   );
   const cars = user.vehicles?.filter((vehicle) => vehicle.category === "car");
-
-  if (!sessionStorage.getItem("user")) {
-    return <Redirect to="/" />;
-  }
 
   return (
     <>

@@ -13,6 +13,8 @@ vehicle.get("", listVehicleController)
 
 vehicle.get("/:idVehicle", retriveVehicleController)
 
-vehicle.delete("/:id", AuthMiddleware, deleteVehicleController)
+vehicle.patch("/:idVehicle", AuthMiddleware, retriveVehicleController)
+
+vehicle.delete("/:idVehicle", AuthMiddleware, deleteVehicleController)
 
 export default vehicle

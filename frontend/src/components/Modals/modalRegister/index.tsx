@@ -8,33 +8,38 @@ function ModalRegister() {
 
   const { hideModalRegister, showModalRegister, inOnRegister } = useModal();
 
-  const { setUserCreate, UserRegisterFunction } = useUser();
+  const { 
+    UserRegisterFunction,
+    setName, 
+    setEmail, 
+    setCellphone, 
+    setPassword,  
+    setConfirmPassword, 
+    setBuyer, 
+    setSeller,
+    seller,
+    buyer,
+    name
+  } = useUser();
 
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [celphone, setCellphone] = useState("");
-  const [password, setPassword] = useState("");
+
   const [initialsName, setInitialsName] = useState("");
-
-  const [userBuyer, setUserBuyer] = useState(true);
-  const [userAnnunciate, setUserAnnunciate] = useState(false);
-
+  
   useEffect(() => {
       const splitName = name?.split(" ");
       splitName.length > 1 ? setInitialsName(splitName[0][0] + splitName[1][0]) : setInitialsName(splitName[0][0]);
   }, [name]);
 
   const createUser = () => {
-    setUserCreate({ name, email, initialsName, celphone, password });
     UserRegisterFunction();
   };
 
   const isBuyer = () => {
-    return userBuyer ? setUserBuyer(false) : setUserBuyer(true);
+    return buyer ? setBuyer(false) : setBuyer(true);
   };
 
   const isAnnunciate = () => {
-    return userAnnunciate ? setUserAnnunciate(false) : setUserAnnunciate(true);
+    return seller ? setSeller(false) : setSeller(true);
   };
 
   const modal = inOnRegister
@@ -82,94 +87,6 @@ function ModalRegister() {
               required
               color="secondary"
             />
-            
-            <C.InputText
-              // setFunction={setCpf}
-              label="CPF"
-              placeholder="000.000.000-00"
-              // required
-              color="secondary"
-            />
-
-            <C.InputText
-              // setFunction={setBirthDate}
-              label="Data de nascimento"
-              placeholder="00/00/00"
-              // required
-              type="date"
-              color="secondary"
-            />
-
-            <C.InputText
-              // setFunction={setDescription}
-              label="Descrição"
-              placeholder="Digitar descrição"
-              // required
-              color="secondary"
-            />
-
-            <label>Informações de endereço</label>
-
-            <C.InputText
-              // setFunction={setPostalCode}
-              label="CEP"
-              placeholder="00000-000"
-              // required
-              color="secondary"
-            />
-
-            <div className="div--adress">
-              <div className="div--field">
-                <C.InputText
-                  // setFunction={setCountry}
-                  label="Estado"
-                  placeholder="Digitar estado"
-                  // required
-                  color="secondary"
-                />
-              </div>
-
-              <div className="div--field">
-                <C.InputText
-                  // setFunction={setCity}
-                  label="Cidade"
-                  placeholder="Digitar cidade"
-                  // required
-                  color="secondary"
-                />
-              </div>
-            </div>
-
-            <C.InputText
-              // setFunction={setStreet}
-              label="Rua"
-              placeholder="Digitar rua"
-              // required
-              color="secondary"
-            />
-
-            <div className="div--adress">
-              <div className="div--field">
-                <C.InputText
-                  // setFunction={setNumberAdress}
-                  label="Número"
-                  placeholder="ex: apart 307"
-                  type="number"
-                  // required
-                  color="secondary"
-                />
-              </div>
-
-              <div className="div--field">
-                <C.InputText
-                  // setFunction={setComplement}
-                  label="Complemento"
-                  placeholder="Digitar complemento"
-                  // required
-                  color="secondary"
-                />
-              </div>
-            </div>
 
             <div className="div--adress">
               <C.ButtonUI
@@ -177,7 +94,7 @@ function ModalRegister() {
                 type="submit"
                 text="Comprador"
                 color="primary"
-                variant={userBuyer ? "contained" : "outlined"}
+                variant={buyer ? "contained" : "outlined"}
               />
 
               <C.ButtonUI
@@ -185,7 +102,7 @@ function ModalRegister() {
                 type="submit"
                 text="Anunciante"
                 color="primary"
-                variant={userAnnunciate ? "contained" : "outlined"}
+                variant={seller ? "contained" : "outlined"}
               />
             </div>
 
@@ -199,10 +116,10 @@ function ModalRegister() {
             />
 
             <C.InputText
-              // setFunction={setConfirmPassword}
+              setFunction={setConfirmPassword}
               label="Confirmar senha"
               placeholder="Confirmar senha"
-              // required
+              required
               color="secondary"
               type="password"
             />

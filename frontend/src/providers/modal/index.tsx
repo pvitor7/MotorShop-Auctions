@@ -12,6 +12,7 @@ export const ModalUserProvider = ({ children }: UserProviderProps) => {
   const [inOnAnnouncement, setInOnAnnouncement] = useState(false);
   const [inOnModalGalery, setInOnModalGalery] = useState(false);
   const [inOnModalAddPhoto, setInOnModalAddPhoto] = useState(false);
+  const [inOnEditAnnouncement, setInOnEditAnnouncement] = useState(false)
 
   const showModalImageGalery = () => {
     setInOnModalGalery(true);
@@ -32,6 +33,18 @@ export const ModalUserProvider = ({ children }: UserProviderProps) => {
     setInOnAnnouncement(false);
     return false;
   };
+
+
+  const showModalEditAnnouncement = () => {
+    setInOnEditAnnouncement(true);
+    return true;
+  };
+
+  const hideModalEditAnnouncement = () => {
+    setInOnEditAnnouncement(false);
+    return false;
+  };
+
 
   const showModalLogin = () => {
     setInOnLogin(true);
@@ -93,6 +106,11 @@ export const ModalUserProvider = ({ children }: UserProviderProps) => {
         setInOnModalGalery,
         showModalImageGalery,
         hidenModalImageGalery,
+
+        inOnEditAnnouncement, 
+        setInOnEditAnnouncement,
+        showModalEditAnnouncement,
+        hideModalEditAnnouncement
       }}
     >
       {children}

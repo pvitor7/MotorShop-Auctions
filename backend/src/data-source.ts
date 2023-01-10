@@ -11,7 +11,7 @@ const AppDataSource = process.env.NODE_ENV === "test" ?
     }) : 
     new DataSource({
         type: "postgres",
-        host: process.env.HOST,
+        host: process.env.HOST || "localhost",
         port: Number(process.env.POSTGRES_PORT),
         username: process.env.POSTGRES_USER,
         password: process.env.POSTGRES_PASSWORD,

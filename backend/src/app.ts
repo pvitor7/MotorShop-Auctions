@@ -20,7 +20,7 @@ app.use(express.json());
 app.use("/users", user)
 app.use("/login", login)
 app.use("/categorie", category)
-app.use("/vehicle", vehicle)
+app.use("/vehicles", vehicle)
 app.use("/offers", offer)
 
 app.use("/comment", comment)

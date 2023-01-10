@@ -3,6 +3,7 @@ import Product from "./Product/index";
 import ModalLogin from '../components/Modals/modalLogin/index';
 import ModalRegister from '../components/Modals/modalRegister/index';
 import ModalAnnouncement from '../components/Modals/modalAnnouncement/index';
+import ModalEditAnnouncement from '../components/Modals/updateAnnouncement/index';
 
 import ModalSucess from '../components/Modals/modalSucess/index';
 import ProfilePage from './ProfilePage/index';
@@ -32,6 +33,7 @@ const Pages = () => {
       <ModalRegister/>
       <ModalSucess/>
       <ModalAnnouncement/>
+      <ModalEditAnnouncement/>
       <ToastContainer
       position="top-right"
       autoClose={3000}

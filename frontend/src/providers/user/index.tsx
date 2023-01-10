@@ -8,10 +8,17 @@ export const UserContext = createContext({} as IUserState);
 
 export const UserProvider = ({ children }: UserProviderProps) => {
   const [user, setUser] = useState({});
-  const [userCreate, setUserCreate] = useState({});
   const [userLoginEmail, setUserLoginEmail] = useState("");
   const [userLoginPassword, setUserLoginPassword] = useState("");
   const { hideModalLogin, showModalSucess, hideModalRegister } = useModal();
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [celphone, setCellphone] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [buyer, setBuyer] = useState(true);
+  const [seller, setSeller] = useState(false);
 
   useEffect(() => GetUser());
 
@@ -27,8 +34,9 @@ export const UserProvider = ({ children }: UserProviderProps) => {
  };
 
   const UserRegisterFunction = () => {
+
     axios
-      .post("http://localhost:3000/users/register", userCreate)
+      .post("http://localhost:3000/users/register", {name, email, celphone, password, confirmPassword, buyer, seller})
       .then(() => {
         toast.success("Usuário criado!", {
           position: "top-right",
@@ -49,6 +57,7 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   const GetUser = () => {
     if (sessionStorage.getItem("user")) {
       const token = JSON.parse(sessionStorage.getItem("user") || "");
+
       axios
         .get("http://localhost:3000/users/vehicles", {
           headers: {
@@ -64,8 +73,6 @@ export const UserProvider = ({ children }: UserProviderProps) => {
   return (
     <UserContext.Provider
       value={{
-        userCreate,
-        setUserCreate,
         user,
         setUser,
         setUserLoginEmail,
@@ -73,6 +80,16 @@ export const UserProvider = ({ children }: UserProviderProps) => {
         LoginFunction,
         UserRegisterFunction,
         GetUser,
+        name,
+        setName, 
+        setEmail, 
+        setCellphone, 
+        setPassword,  
+        setConfirmPassword, 
+        setBuyer, 
+        setSeller,
+        seller,
+        buyer
       }}
     >
       {children}

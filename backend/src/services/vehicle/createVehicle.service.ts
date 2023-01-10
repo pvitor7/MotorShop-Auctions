@@ -27,8 +27,7 @@ const createVehicleService = async (
     dateAuction,
   }: IVehicleRequestCreate
 ): Promise<IVehicleResponseCreate> => {
-  
-  console.log(id);
+
 
   const userRepository = AppDataSource.getRepository(User);
 
@@ -37,12 +36,11 @@ const createVehicleService = async (
   const user = await userRepository.findOneBy({ id: id });
 
   if (!user) {
-    throw new AppError("User not found", 404);
+    throw new AppError("Usuário não encontrado!", 404);
   }
   if (
     !heading ||
     !categorie ||
-    !status ||
     !year ||
     !km ||
     !price ||
@@ -52,9 +50,8 @@ const createVehicleService = async (
     throw new AppError("Illegal arguments", 400);
   }
 
-  let category: Category | null = await CategoryRepository.findOneByCategory(
-    categorie
-  );
+
+  let category: Category | null = await CategoryRepository.findOneBy({categorie});
 
   if (!category) {
     const newCategory = new Category();
@@ -68,13 +65,13 @@ const createVehicleService = async (
 
   const vehicle = new Vehicle();
   vehicle.heading = heading;
-  vehicle.status = status ? true : false;
+  vehicle.status = status;
   vehicle.year = year;
   vehicle.km = km;
   vehicle.price = price;
   vehicle.description = description;
-  vehicle.published = published || false;
-  vehicle.auction = auction || false;
+  vehicle.published = published;
+  vehicle.auction = auction;
   vehicle.img = img;
   vehicle.username = user.name;
   vehicle.userId = user.id;
@@ -89,7 +86,7 @@ const createVehicleService = async (
 
   if (gallery) {
     gallery.map(
-      async (url) => await createGalleryService(id, newVehicle.id, { url })
+      async (url: any) => await createGalleryService(id, newVehicle.id, { url: url.url })
     );
   }
 

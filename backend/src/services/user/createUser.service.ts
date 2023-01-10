@@ -7,16 +7,18 @@ import {
 } from "../../interfaces/user.interface";
 import UserRepository from "../../repositories/user.repository";
 
+
 const createUserServive = async ({
   name,
   celphone,
   email,
-  password,
+  password, 
+  seller, buyer
 }: IUserRequest): Promise<IUserResponseCreate> => {
   if (!name || !email || !password || !celphone) {
     throw new AppError("Illegal arguments", 400);
   }
-
+  
   const emailAlreadyExisty = await UserRepository.findByEmail(email);
 
   if (emailAlreadyExisty) {
@@ -28,7 +30,8 @@ const createUserServive = async ({
   user.celphone = celphone;
   user.email = email;
   user.password = await hash(password, 10);
-  user.is_active = true;
+  user.seller = seller || false;
+  user.buyer = buyer || true;
 
   const newUser: IUserResponseCreate = await UserRepository.create(user);
 

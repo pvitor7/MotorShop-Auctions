@@ -96,8 +96,6 @@ const Aside = ({ vehicle }: IAsideProps) => {
 
           <h4>{vehicle?.username}</h4>
 
-          <p className="description">{vehicle?.description}</p>
-
           <C.ButtonUI
             setBoolean={toHomePage}
             text="Ver todos os anúncios"

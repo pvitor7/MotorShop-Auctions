@@ -5,6 +5,6 @@ import schemaValidation from "../middlewares/schemaValidation.middleware";
 
 const login = Router()
 
-login.post("", userLoginController)
+login.post("", schemaValidation(loginSchema), userLoginController)
 
 export default login

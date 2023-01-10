@@ -5,8 +5,11 @@ import { LiCard, DivCard, Span } from "./style";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { AiOutlineLoading } from "react-icons/ai";
+import { useModal } from "../../providers/modal/index";
+import { useVehicle } from "../../providers/vehicles/index";
+import { useUser } from "../../providers/user/index";
 
-const Card = ({owner, vehicle }: VehiclesProps) => {
+const Card = ({ vehicle }: VehiclesProps) => {
   const [initialsName, setInitialsName] = useState("");
   const {
     id,
@@ -17,8 +20,17 @@ const Card = ({owner, vehicle }: VehiclesProps) => {
     img,
     year,
     auction,
-    price
+    price,
+    userId,
+    status
   }: Vehicle = vehicle;
+
+  const { setId } = useVehicle();
+  const { user } = useUser();
+
+  const {
+    showModalEditAnnouncement
+  } = useModal();
 
   useEffect(() => {
     if (username) {
@@ -33,6 +45,11 @@ const Card = ({owner, vehicle }: VehiclesProps) => {
   const priceBRL = Number(price).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
   const kmLabel = Number(km).toLocaleString();
   
+  const openEditModal = () => {
+    setId(vehicle.id)
+    showModalEditAnnouncement();
+  }
+
 
   return (
     <LiCard
@@ -46,7 +63,12 @@ const Card = ({owner, vehicle }: VehiclesProps) => {
     >
     
       <figure>
-        <span>{auction? "Ativo" : "Inativo"}</span>
+        {status ? 
+        <span className="auction  Active">Ativo</span>
+          :
+        <span className="auction  Inactive">Vendido</span>
+
+      }
 
         <img onClick={()=> history.push(`/product/${id}`)} src={img} alt="" />
       </figure>
@@ -70,9 +92,11 @@ const Card = ({owner, vehicle }: VehiclesProps) => {
         <span>{priceBRL}</span>
       </DivCard>
 
-      {owner && 
+      {user.id == userId && 
       <div className="div-buttons">
-          <ButtonUI text="Editar" color="secondary" variant="outlined" />
+          <ButtonUI text="Editar" color="secondary" variant="outlined" 
+          setBoolean={openEditModal} 
+          />
           <ButtonUI text="Ver como" color="secondary" variant="outlined" />
       </div>
       }

@@ -12,7 +12,7 @@ const HomePage = () => {
     const { listCars, listMotorcycles, listVehicles } = useVehicle();
 
     const auctionVehicles = listVehicles.filter((car: any) => {
-        return car.status});
+        return car.auction});
 
     return(
         <HomePageStyled>

@@ -23,12 +23,16 @@ const Product = () => {
     vehicle,
     setId,
 
+    setSale,
+    setAuction,
+    setStatus,
     setNewComment,
     setNewOffer,
     setNewPhoto,
     NewCommentVehicle,
     NewOfferFunction,
     NewPhotoFunction,
+    VehicleUpdateFunction,
   } = useVehicle();
   const { inOnModalAddPhoto, setInOnModalAddPhoto } = useModal();
   const { user } = useUser();
@@ -37,6 +41,25 @@ const Product = () => {
   const [inputDisabled, setInputDisabled] = useState(true);
   const [timeForAuction, setTimeForAuction]: any = useState();
   const [vehicleExistis, setVehicleExists] = useState(false);
+  const [modalSale, setModalSale] = useState(false);
+
+  const openModalSale = () => {
+    setModalSale(true);
+  };
+
+  const closeModalSale = () => {
+    setModalSale(false);
+  };
+
+  const confirmSale = () => {
+    setStatus(false);
+    setSale(false);
+    setAuction(false);
+    setTimeout(() => {
+      VehicleUpdateFunction();
+    }, 1000);
+    setModalSale(false);
+  };
 
   useEffect(() => {
     setInterval(() => {
@@ -61,18 +84,19 @@ const Product = () => {
     user.email ? setInputDisabled(false) : setInputDisabled(true);
     if (vehicle) {
       setInterval(() => {
-        vehicle.dateAuction &&
+        vehicle?.dateAuction &&
           setTimeForAuction(timeAuction(vehicle.dateAuction));
       }, 1000);
     }
   }, [id, user]);
 
-  const initialsName = convertInitialsName(vehicle.username);
+  const initialsName = convertInitialsName(vehicle?.username);
   const intialsProfile = convertInitialsName(user.name);
-  const priceBRL = Number(vehicle.price).toLocaleString("pt-BR", {
+  const priceBRL = Number(vehicle?.price).toLocaleString("pt-BR", {
     style: "currency",
     currency: "BRL",
   });
+  const kmLabel = Number(vehicle?.km).toLocaleString();
 
   return (
     <>
@@ -88,7 +112,7 @@ const Product = () => {
               ease: [0, 0.71, 0.2, 1.01],
             }}
           >
-            <img src={vehicle.img} />
+            <img src={vehicle?.img} />
           </S.ContainerIMG>
 
           <S.ContainerInfoProduct
@@ -100,21 +124,26 @@ const Product = () => {
               ease: [0, 0.71, 0.2, 1.01],
             }}
           >
-            <p>{vehicle.heading}</p>
+            <h3>{vehicle?.heading}</h3>
 
             <div>
-              <C.LabelAgeKm info={vehicle.year} />
-              <C.LabelAgeKm info={vehicle.km} />
+              <C.LabelAgeKm info={vehicle?.year} />
+              <C.LabelAgeKm info={`${kmLabel} KM`} />
             </div>
             <label>{priceBRL}</label>
             <div>
-              <C.ButtonUI text="Comprar" color="primary" variant="contained" />
+              <C.ButtonUI
+                text="Comprar"
+                color="primary"
+                variant="contained"
+                setBoolean={openModalSale}
+              />
             </div>
           </S.ContainerInfoProduct>
 
           <S.ContainerDescription>
             <h3>Descrição</h3>
-            <p>{vehicle.description}</p>
+            <p>{vehicle?.description}</p>
           </S.ContainerDescription>
 
           <section className="aside--mobile">
@@ -124,7 +153,7 @@ const Product = () => {
           {vehicleExistis && (
             <S.ContainerComments>
               {vehicle &&
-                vehicle.comments?.map((comment: any, index: number) => {
+                vehicle?.comments?.map((comment: any, index: number) => {
                   const initialsNameComment = convertInitialsName(
                     comment.user_name
                   );
@@ -163,24 +192,6 @@ const Product = () => {
                 color="primary"
                 variant="contained"
               />
-              {/* {user && (
-                <div className="comments-standart">
-                  <label 
-                  onClick={() => { setNewComment("Gostei muito!")}}>
-                    Gostei muito!
-                  </label>
-                  <label onClick={() => setNewComment("Incrível!")}>
-                    Incrível!
-                  </label>
-                  <label
-                    onClick={() =>
-                      setNewComment("Recomendarei para meus amigos!")
-                    }
-                  >
-                    Recomendarei para meus amigos!
-                  </label>
-                </div>
-              )} */}
             </S.ContainerNewComments>
           )}
         </section>
@@ -194,12 +205,12 @@ const Product = () => {
 
               <S.AuctionTimeStyled className="auction-time">
                 <img src={TimeAuction} className="img--time-auction" alt="" />
-                <p> {vehicle.auction ? timeForAuction : "Inativo"} </p>
+                <p> {vehicle?.auction ? timeForAuction : "Inativo"} </p>
               </S.AuctionTimeStyled>
 
               <ul>
-                {vehicle &&
-                  vehicle.offers
+                {vehicle.auction &&
+                  vehicle?.offers
                     ?.map((offer: any, index: number) => {
                       const priceOffer = Number(offer.offer).toLocaleString(
                         "pt-BR",
@@ -214,7 +225,7 @@ const Product = () => {
                     .reverse()}
               </ul>
 
-              {!inputDisabled && timeForAuction != "Encerrado" && (
+              {!inputDisabled && timeForAuction !== "Encerrado" && (
                 <div>
                   <C.InputText
                     setFunction={setNewOffer}
@@ -238,6 +249,46 @@ const Product = () => {
       </S.ProductPageStyled>
 
       <C.Footer />
+
+      {user && modalSale && (
+        <S.ModalSale>
+          <form>
+            <h2>Informações da compra</h2>
+            <p>
+              {" "}
+              <span> Modelo: </span> {vehicle?.heading}{" "}
+            </p>
+            <p>
+              {" "}
+              <span>Proprietário: </span> {vehicle?.username}{" "}
+            </p>
+            <p>
+              {" "}
+              <span> Valor: </span> {priceBRL}{" "}
+            </p>
+            <p>
+              {" "}
+              <span> Quilometragem: </span> {kmLabel}{" "}
+            </p>
+            {/* <p> <span>Informe sua senha: </span> <C.InputText setFunction={setNewOffer} color="primary" type="password"/> </p> */}
+
+            <div>
+              <C.ButtonUI
+                text="Confirmar"
+                variant="contained"
+                color="primary"
+                setBoolean={confirmSale}
+              />
+              <C.ButtonUI
+                text="Cancelar"
+                color="secondary"
+                variant="contained"
+                setBoolean={closeModalSale}
+              />
+            </div>
+          </form>
+        </S.ModalSale>
+      )}
 
       {inOnModalAddPhoto && (
         <S.ModalAddPhotoStyled className="modal--add-Photo">
@@ -263,7 +314,7 @@ const Product = () => {
                 type="submit"
                 onClick={(e) => {
                   e.preventDefault();
-                    NewPhotoFunction();
+                  NewPhotoFunction();
                 }}
               >
                 Enviar
