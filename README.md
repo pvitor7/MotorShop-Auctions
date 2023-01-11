@@ -1,13 +1,17 @@
 # MotorShop-Auctions
 Plataforma de venda e leilão de veículos
 
-<img src="frontend/public/HomePage.png">
-<img src="frontend/public/Homepage2.png">
-<img src="frontend/public/HomePage3.png">
-<img src="frontend/public/Product.png">
-<img src="frontend/public/Productgallery.png">
-<img src="frontend/public/ProductOffers.png">
+<div>
 
+<img src="frontend/public/HomePage.png" width="500">
+<img src="frontend/public/Homepage2.png" width="500">
+<img src="frontend/public/HomePage3.png" width="500">
+<img src="frontend/public/Product.png" width="500">
+<img src="frontend/public/Productgallery.png" width="500">
+<img src="frontend/public/ProductOffers.png" width="500">
+
+</div>
+	
 # Documentação
 
 ## Tabela de Conteúdos
