@@ -26,6 +26,7 @@ Plataforma de venda e leilão de veículos
 
 Visão geral do projeto, um pouco das tecnologias usadas.
 
+- [ReactJS](https://pt-br.reactjs.org/)
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
 - [TypeScript](https://www.typescriptlang.org/)
