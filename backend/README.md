@@ -1,18 +1,7 @@
-# MotorShop-Auctions
-Plataforma de venda e leilão de veículos
+# AuctionCar
+Plataforma de leilão de automóveis
 
-<div>
-
-<img src="frontend/public/HomePage.png" width="400">
-<img src="frontend/public/Homepage2.png" width="400">
-<img src="frontend/public/HomePage3.png" width="400">
-<img src="frontend/public/Product.png" width="400">
-<img src="frontend/public/Productgallery.png" width="400">
-<img src="frontend/public/ProductOffers.png" width="400">
-
-</div>
-	
-# Documentação
+# Documentação da API
 
 ## Tabela de Conteúdos
 
@@ -26,7 +15,6 @@ Plataforma de venda e leilão de veículos
 
 Visão geral do projeto, um pouco das tecnologias usadas.
 
-- [ReactJS](https://pt-br.reactjs.org/)
 - [NodeJS](https://nodejs.org/en/)
 - [Express](https://expressjs.com/pt-br/)
 - [TypeScript](https://www.typescriptlang.org/)
@@ -35,51 +23,36 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [uuid](https://www.npmjs.com/package/uuid)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [bcryptjs](https://www.npmjs.com/package/bcrypt)
-- [Docker](https://docs.docker.com/)
+
 
 ## 2. Início Rápido
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
-### 2.1. Variáveis de Ambiente
+### 2.1. Instalando Dependências
 
-Clone o projeto em sua máquina. Em seguida, dentro do diretório **./backend** crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
+Clone o projeto em sua máquina e instale as dependências com o comando:
+
+```shell
+yarn
+```
+
+### 2.2. Variáveis de Ambiente
+
+Em seguida, crie um arquivo **.env**, copiando o formato do arquivo **.env.example**:
 
 ```
 cp .env.example .env
-```
-
-### 2.2. Instalando Dependências
-
-Após isso, retorne a pasta raiz do projeto para a criação dos containers, utilize o seguinte comando:
-
-```shell
-docker-compose up
 ```
 
 Configure suas variáveis de ambiente com suas credenciais do Postgres e uma nova database da sua escolha.
 
 ### 2.3. Migrations
 
-Em outro terminal, execute as migrations com o comando:
+Execute as migrations com o comando:
 
-
-```shell
-- docker exec api_motorshop yarn typeorm migration:generate src/migrations/createTable -d src/data-source.ts
 ```
-
-
-```shell
-- docker exec api_motorshop yarn typeorm migration:run -d src/data-source.ts
-```
-
-### 2.4. Testes
-
-A api também possui testes (em desenvolvimento), que podem ser executados dentro do diretório **./backend** com o comando:
-
-
-```shell
-- yarn test
+yarn typeorm migration:run -d src/data-source.ts
 ```
 
 ## 3. Endpoints
