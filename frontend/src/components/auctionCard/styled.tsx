@@ -74,7 +74,8 @@ const AuctionCardStyle = styled(motion.div)`
     }
 
     p > div > .icon-user{
-      width: 70px;
+      width: 50px;
+      height: 40px;
     }
 
     div > span {

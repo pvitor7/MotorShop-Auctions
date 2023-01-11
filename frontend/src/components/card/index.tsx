@@ -60,6 +60,7 @@ const Card = ({ vehicle }: VehiclesProps) => {
       delay: 0.5,
       ease: [0, 0.71, 0.2, 1.01],
     }}
+    onClick={()=> history.push(`/product/${id}`)} 
     >
     
       <figure>
@@ -70,7 +71,7 @@ const Card = ({ vehicle }: VehiclesProps) => {
 
       }
 
-        <img onClick={()=> history.push(`/product/${id}`)} src={img} alt="" />
+        <img src={img} alt="" />
       </figure>
 
       <h3>{heading}</h3>

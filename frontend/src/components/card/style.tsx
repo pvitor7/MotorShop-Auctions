@@ -28,6 +28,7 @@ export const LiCard = styled(motion.li)`
 
   > figure > .auction {
     position: absolute;
+    z-index: -1;
     left: 35px;
     display: flex;
     color: var(--color-white-fixed);
@@ -50,6 +51,7 @@ export const LiCard = styled(motion.li)`
     max-width: 100%;
     margin-top: 1px;
     position: static;
+    z-index: -1;
   }
 
   > h3 {
