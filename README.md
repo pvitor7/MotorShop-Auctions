@@ -34,7 +34,7 @@ Visão geral do projeto, um pouco das tecnologias usadas.
 - [uuid](https://www.npmjs.com/package/uuid)
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 - [bcryptjs](https://www.npmjs.com/package/bcrypt)
-
+- [Docker](https://docs.docker.com/)
 
 ## 2. Início Rápido
 
