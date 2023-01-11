@@ -39,7 +39,7 @@ const Card = ({ vehicle }: VehiclesProps) => {
         ? setInitialsName(splitName[0][0] + splitName[1][0])
         : setInitialsName(splitName[0][0]);
     }
-  }, []);
+  });
 
   const history = useHistory();
   const priceBRL = Number(price).toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'});
