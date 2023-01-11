@@ -3,12 +3,12 @@ Plataforma de venda e leilão de veículos
 
 <div>
 
-<img src="frontend/public/HomePage.png" width="500">
-<img src="frontend/public/Homepage2.png" width="500">
-<img src="frontend/public/HomePage3.png" width="500">
-<img src="frontend/public/Product.png" width="500">
-<img src="frontend/public/Productgallery.png" width="500">
-<img src="frontend/public/ProductOffers.png" width="500">
+<img src="frontend/public/HomePage.png" width="400">
+<img src="frontend/public/Homepage2.png" width="400">
+<img src="frontend/public/HomePage3.png" width="400">
+<img src="frontend/public/Product.png" width="400">
+<img src="frontend/public/Productgallery.png" width="400">
+<img src="frontend/public/ProductOffers.png" width="400">
 
 </div>
 	
